@@ -1,0 +1,10 @@
+body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+  }
+  
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  

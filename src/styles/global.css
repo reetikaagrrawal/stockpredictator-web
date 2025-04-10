@@ -1,0 +1,101 @@
+/* Light theme (default) */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #0d6efd;
+  }
+  
+  /* Dark theme overrides */
+  body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --primary-color: #0d6efd;
+  }
+  
+  /* Global body styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, var(--bg-color), #eaeaea, #c0c0c0, var(--bg-color));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Animated background */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  body.dark-mode {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+  }
+  
+  /* Headings and text */
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0.5rem;
+    color: var(--text-color);
+  }
+  
+  /* Links */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Buttons */
+  button {
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  /* Scrollbar customization (optional) */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* ✅ Glassmorphism card style */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  body.dark-mode .glass-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
