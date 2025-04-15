@@ -20,6 +20,8 @@ function App() {
       // const response = await axios.post("http://localhost:8000/predict", {
       //   stock_symbol: symbol, // ✅ Matches FastAPI backend model
       // });
+      console.log("Triggering prediction for:", symbol);
+
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/predict`, {
         stock_symbol: symbol, // ✅ Matches FastAPI backend model
       });
