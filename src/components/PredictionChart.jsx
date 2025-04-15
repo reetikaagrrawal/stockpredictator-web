@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale } from 'chart.js';
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
+} from 'chart.js';
 
 ChartJS.register(LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale);
 
@@ -8,8 +17,13 @@ const PredictionChart = ({ data }) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
-    const root = document.documentElement;
-    setIsDarkMode(root.classList.contains('dark'));
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
   }, []);
 
   const chartData = {
@@ -57,7 +71,7 @@ const PredictionChart = ({ data }) => {
   };
 
   return (
-    <div className="p-4 rounded-xl backdrop-blur-md bg-white/5 dark:bg-white/10 shadow-lg">
+    <div className="glass-card">
       <Line data={chartData} options={options} />
     </div>
   );

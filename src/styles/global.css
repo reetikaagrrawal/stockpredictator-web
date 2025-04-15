@@ -122,8 +122,3 @@ body.dark-mode .glass-card {
   text-shadow: 0 0 6px rgba(0, 255, 195, 0.3);
   font-weight: 500;
 }
-
-/* ✅ Neon Drop Shadow Utility */
-.drop-shadow-glow {
-  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
-}
