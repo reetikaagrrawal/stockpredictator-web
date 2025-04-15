@@ -1,101 +1,124 @@
-/* Light theme (default) */
+/* Light Theme */
 :root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --primary-color: #0d6efd;
-  }
-  
-  /* Dark theme overrides */
-  body.dark-mode {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --primary-color: #0d6efd;
-  }
-  
-  /* Global body styles */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(-45deg, var(--bg-color), #eaeaea, #c0c0c0, var(--bg-color));
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: var(--text-color);
-    transition: all 0.3s ease-in-out;
-  }
-  
-  /* Animated background */
-  @keyframes gradientBG {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  body.dark-mode {
-    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
-  }
-  
-  /* Headings and text */
-  h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0.5rem;
-    color: var(--text-color);
-  }
-  
-  /* Links */
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  /* Buttons */
-  button {
-    font-size: 16px;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-  }
-  
-  /* Scrollbar customization (optional) */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  /* ✅ Glassmorphism card style */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  body.dark-mode .glass-card {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #0d6efd;
+  --accent-color: #00ffc3;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+}
 
-  .gradient-text {
-    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Dark Theme Overrides */
+body.dark-mode {
+  --bg-color: #0f0c29;
+  --text-color: #ffffff;
+  --primary-color: #0d6efd;
+  --accent-color: #00ffc3;
+  --glass-bg: rgba(0, 0, 0, 0.2);
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, var(--bg-color), #eaeaea, #c0c0c0, var(--bg-color));
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: var(--text-color);
+  transition: all 0.4s ease-in-out;
+  overflow-x: hidden;
+}
+
+body.dark-mode {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+}
+
+/* Animated Background Keyframes */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0.5rem;
+  color: var(--text-color);
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Buttons */
+button {
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+body.dark-mode .glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient + Neon Text */
+.gradient-text {
+  background: linear-gradient(90deg, #0d6efd, #00ffc3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 195, 0.4), 0 0 20px rgba(13, 110, 253, 0.3);
   }
+  50% {
+    text-shadow: 0 0 15px rgba(0, 255, 195, 0.7), 0 0 30px rgba(13, 110, 253, 0.5);
+  }
+}
+
+/* Glowing Subtext */
+.glow-text {
+  color: var(--text-color);
+  text-shadow: 0 0 6px rgba(0, 255, 195, 0.3);
+  font-weight: 500;
+}

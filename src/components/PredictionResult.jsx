@@ -1,4 +1,3 @@
-// src/components/PredictionResult.jsx
 import { motion } from 'framer-motion'
 import { Card } from 'react-bootstrap'
 
@@ -14,7 +13,9 @@ const PredictionResult = ({ symbol, predictions }) => {
       className="my-5"
     >
       <Card className="glass-card p-4 shadow-lg border-0">
-        <h4 className="text-center fw-bold mb-3">📊 Prediction for {symbol}</h4>
+        <h4 className="text-center fw-bold mb-3" style={{ color: 'var(--text-color)' }}>
+          📊 Prediction for {symbol}
+        </h4>
         <ul className="list-unstyled text-center">
           {predictions.map((price, index) => (
             <motion.li
@@ -24,6 +25,7 @@ const PredictionResult = ({ symbol, predictions }) => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="mb-2"
+              style={{ color: 'var(--text-color)' }}
             >
               <span className="fw-medium">Day {index + 1}</span>: ₹ {price.toFixed(2)}
             </motion.li>

@@ -34,6 +34,7 @@ const StockInputForm = ({ onSubmit }) => {
                   value={stockSymbol}
                   onChange={(e) => setStockSymbol(e.target.value)}
                   className="rounded-3 border-2"
+                  style={{ color: 'var(--text-color)', backgroundColor: 'transparent' }}
                 />
               </FloatingLabel>
               <div className="d-grid">
