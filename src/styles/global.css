@@ -83,19 +83,39 @@ button:hover {
   background: transparent;
 }
 
-/* Glassmorphism */
+/* Glassmorphism with Animation & Neon Glow */
 .glass-card {
   background: var(--glass-bg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3),
+              0 0 20px rgba(0, 255, 195, 0.06); /* Soft neon glow */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
   transition: all 0.3s ease-in-out;
 }
 
 body.dark-mode .glass-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 255, 195, 0.08),
+              0 0 25px rgba(0, 255, 195, 0.08);
+}
+
+.glass-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 32px rgba(0, 255, 195, 0.08),
+              0 0 30px rgba(0, 255, 195, 0.12);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Gradient + Neon Text */

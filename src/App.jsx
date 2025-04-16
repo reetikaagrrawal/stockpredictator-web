@@ -3,33 +3,34 @@ import { motion } from "framer-motion";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 
+// Components
 import CustomNavbar from "./components/Navbar";
 import StockInputForm from "./components/StockInputForm";
 import PredictionResult from "./components/PredictionResult";
-import PredictionChart from "./components/PredictionChart"; // ✅ Chart.js
-import TradingViewWidget from "./components/TradingViewWidget"; // ✅ Live stock chart
-import ScrollReveal from "./components/ScrollReveal"; // ✅ Scroll-based animation
-import CursorTrail from "./components/CursorTrail"; // ✅ Neon cursor trail
+import PredictionChart from "./components/PredictionChart";
+import TradingViewWidget from "./components/TradingViewWidget";
+import ScrollReveal from "./components/ScrollReveal";
+import CursorTrail from "./components/CursorTrail";
 
+// Global styles
 import "./styles/global.css";
 
 function App() {
   const [predictionData, setPredictionData] = useState(null);
 
-  // ✅ Force dark mode on load
+  // ✅ Enforce dark mode on first load
   useEffect(() => {
     document.body.classList.add("dark-mode");
   }, []);
 
+  // ✅ Handle API call for stock prediction
   const handlePredictionRequest = async (symbol) => {
     try {
-      console.log("Triggering prediction for:", symbol);
+      console.log("Predicting for:", symbol);
 
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/predict`,
-        {
-          stock_symbol: symbol, // ✅ Matches FastAPI backend model
-        }
+        { stock_symbol: symbol }
       );
 
       setPredictionData({
@@ -37,16 +38,19 @@ function App() {
         predictions: response.data.predicted_prices,
       });
     } catch (err) {
-      console.error("Prediction failed:", err);
+      console.error("Prediction error:", err);
     }
   };
 
   return (
     <>
+      {/* Neon Cursor Trail */}
       <CursorTrail />
+
+      {/* Navbar */}
       <CustomNavbar />
 
-      {/* ✅ Optional Dark/Light Toggle Button */}
+      {/* Theme Toggle */}
       <div style={{ textAlign: "center", marginTop: "1rem" }}>
         <button
           onClick={() => document.body.classList.toggle("dark-mode")}
@@ -63,7 +67,9 @@ function App() {
         </button>
       </div>
 
+      {/* Animated Background Wrapper */}
       <div className="bg-wrapper">
+        {/* Hero Section */}
         <motion.div
           className="hero-text neon-hero"
           initial={{ opacity: 0, y: -50 }}
@@ -79,11 +85,14 @@ function App() {
           </p>
         </motion.div>
 
+        {/* Form + Predictions */}
         <Container className="mt-5">
+          {/* Input Form */}
           <ScrollReveal>
             <StockInputForm onSubmit={handlePredictionRequest} />
           </ScrollReveal>
 
+          {/* Display Results After Prediction */}
           {predictionData && (
             <>
               <ScrollReveal delay={0.3}>
