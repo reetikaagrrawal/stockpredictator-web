@@ -1,8 +1,12 @@
-import { motion } from 'framer-motion'
-import { Card } from 'react-bootstrap'
+import { motion } from 'framer-motion';
+import { Card } from 'react-bootstrap';
+import { useTheme } from 'next-themes';
 
 const PredictionResult = ({ symbol, predictions }) => {
-  if (!predictions?.length) return null
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = resolvedTheme === 'dark';
+
+  if (!predictions?.length) return null;
 
   return (
     <motion.div
@@ -12,8 +16,18 @@ const PredictionResult = ({ symbol, predictions }) => {
       viewport={{ once: true }}
       className="my-5"
     >
-      <Card className="glass-card p-4 shadow-lg border-0">
-        <h4 className="text-center fw-bold mb-3" style={{ color: 'var(--text-color)' }}>
+      <Card
+        className="glass-card p-4 shadow-lg border-0 backdrop-blur-md"
+        style={{
+          backgroundColor: isDarkMode
+            ? 'rgba(255, 255, 255, 0.05)'
+            : 'rgba(0, 0, 0, 0.03)',
+        }}
+      >
+        <h4
+          className="text-center fw-bold mb-3"
+          style={{ color: isDarkMode ? '#00ffc3' : '#0d6efd' }}
+        >
           📊 Prediction for {symbol}
         </h4>
         <ul className="list-unstyled text-center">
@@ -25,15 +39,16 @@ const PredictionResult = ({ symbol, predictions }) => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="mb-2"
-              style={{ color: 'var(--text-color)' }}
+              style={{ color: isDarkMode ? '#ffffff' : '#000000' }}
             >
-              <span className="fw-medium">Day {index + 1}</span>: ₹ {price.toFixed(2)}
+              <span className="fw-medium">Day {index + 1}</span>:{' '}
+              <span className="fw-bold">₹ {price.toFixed(2)}</span>
             </motion.li>
           ))}
         </ul>
       </Card>
     </motion.div>
-  )
-}
+  );
+};
 
-export default PredictionResult
+export default PredictionResult;
