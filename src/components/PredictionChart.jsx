@@ -12,27 +12,22 @@ import {
 } from 'chart.js';
 import { useTheme } from 'next-themes';
 
-// Register chart elements
+// Register elements
 ChartJS.register(LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale);
 
-const PredictionChart = ({ data }) => {
+const PredictionChart = ({ data = [], symbol = 'Stock' }) => {
   const { resolvedTheme } = useTheme();
   const isDarkMode = resolvedTheme === 'dark';
 
   const labels = data.map((_, i) => `Day ${i + 1}`);
   const lastPrediction = data[data.length - 1]?.toFixed(2);
 
-  // Dynamic y-axis range padding
-  const minValue = Math.min(...data);
-  const maxValue = Math.max(...data);
-  const padding = (maxValue - minValue) * 0.1 || 1; // prevent 0 padding if values are flat
-
   const chartData = {
-    labels: labels,
+    labels,
     datasets: [
       {
-        label: 'AAPL Price Prediction',
-        data: data,
+        label: `${symbol.toUpperCase()} Price Prediction`,
+        data,
         borderColor: isDarkMode ? '#00ffc3' : '#0d6efd',
         backgroundColor: isDarkMode ? 'rgba(0, 255, 195, 0.2)' : 'rgba(13, 110, 253, 0.2)',
         tension: 0.4,
@@ -72,8 +67,6 @@ const PredictionChart = ({ data }) => {
       },
       y: {
         beginAtZero: false,
-        min: minValue - padding,
-        max: maxValue + padding,
         ticks: {
           color: isDarkMode ? '#ffffff' : '#000000',
           font: { size: 14 },
@@ -85,11 +78,19 @@ const PredictionChart = ({ data }) => {
     },
   };
 
+  if (!data || data.length === 0 || data.every(val => val === 0)) {
+    return (
+      <div className="glass-card p-6 rounded-2xl text-center text-muted-foreground shadow-md">
+        ⚠️ No prediction data available for {symbol.toUpperCase()}.
+      </div>
+    );
+  }
+
   return (
     <div className="glass-card p-6 rounded-2xl shadow-lg">
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold text-primary tracking-wide">
-          📈 AAPL Price Prediction
+          📈 {symbol.toUpperCase()} Price Prediction
         </h2>
         {lastPrediction && (
           <div className="text-lg text-accent font-medium">
@@ -98,12 +99,17 @@ const PredictionChart = ({ data }) => {
         )}
       </div>
 
-      {/* Chart with glow via shadow */}
-      <div className="relative z-10 drop-shadow-[0_0_10px_rgba(0,255,195,0.3)]">
-        <Line data={chartData} options={options} />
+      {/* Chart */}
+      <div className="relative">
+        <div className="absolute inset-0 blur-md opacity-30 pointer-events-none z-0">
+          <Line data={chartData} options={options} />
+        </div>
+        <div className="relative z-10">
+          <Line data={chartData} options={options} />
+        </div>
       </div>
 
-      {/* Value Labels */}
+      {/* Value labels */}
       <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-center">
         {data.map((value, i) => (
           <div
